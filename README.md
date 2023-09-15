@@ -1,2 +1,2 @@
-# Netjob
+# Lightweight networking library
 # Netjob
