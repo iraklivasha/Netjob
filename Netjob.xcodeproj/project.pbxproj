@@ -7,37 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		389973EB249A2022000431E1 /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389973EA249A2022000431E1 /* URLRequest.swift */; };
-		38CD33A42488FB430073AFFC /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38CD33A32488FB430073AFFC /* NetworkRequest.swift */; };
-		644369D52525C98D00D4B4CF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644369D42525C98D00D4B4CF /* Constants.swift */; };
+		383A78542B30D18D009B8C0E /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A78492B30D18C009B8C0E /* Endpoint.swift */; };
+		383A78552B30D18D009B8C0E /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A784A2B30D18C009B8C0E /* HTTPMethod.swift */; };
+		383A78562B30D18D009B8C0E /* NetjobRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A784B2B30D18D009B8C0E /* NetjobRequest.swift */; };
+		383A78572B30D18D009B8C0E /* URLRequest+Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A784C2B30D18D009B8C0E /* URLRequest+Logger.swift */; };
+		383A78582B30D18D009B8C0E /* SyncArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A784D2B30D18D009B8C0E /* SyncArray.swift */; };
+		383A78592B30D18D009B8C0E /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A784E2B30D18D009B8C0E /* Logger.swift */; };
+		383A785A2B30D18D009B8C0E /* CodingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A784F2B30D18D009B8C0E /* CodingStrategy.swift */; };
+		383A785B2B30D18D009B8C0E /* Netjob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A78502B30D18D009B8C0E /* Netjob.swift */; };
+		383A785C2B30D18D009B8C0E /* Data+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A78512B30D18D009B8C0E /* Data+String.swift */; };
+		383A785D2B30D18D009B8C0E /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A78522B30D18D009B8C0E /* URLRequest.swift */; };
+		383A785E2B30D18D009B8C0E /* NetjobError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A78532B30D18D009B8C0E /* NetjobError.swift */; };
 		64668F1A2484CC860086A064 /* Netjob.h in Headers */ = {isa = PBXBuildFile; fileRef = 64668F182484CC860086A064 /* Netjob.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		64BA6E1E2484CEFD005D2E5A /* Netjob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BA6E1D2484CEFD005D2E5A /* Netjob.swift */; };
-		64BA6E202484CFD3005D2E5A /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BA6E1F2484CFD3005D2E5A /* HTTPMethod.swift */; };
-		64BA6E222484D0E4005D2E5A /* NetworkService+URLSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BA6E212484D0E4005D2E5A /* NetworkService+URLSessionDelegate.swift */; };
-		64BA6E242484D1BA005D2E5A /* NetjobError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BA6E232484D1BA005D2E5A /* NetjobError.swift */; };
-		64BA6E262484D241005D2E5A /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BA6E252484D241005D2E5A /* NetworkService.swift */; };
-		64BA6E282484D2E5005D2E5A /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BA6E272484D2E5005D2E5A /* Logger.swift */; };
-		64BA6E2A2484D3C7005D2E5A /* URLRequest+Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BA6E292484D3C7005D2E5A /* URLRequest+Logger.swift */; };
-		64BA6E2C2484D3E8005D2E5A /* Data+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BA6E2B2484D3E8005D2E5A /* Data+String.swift */; };
-		64BA6E2E2484D70E005D2E5A /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BA6E2D2484D70E005D2E5A /* Endpoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		389973EA249A2022000431E1 /* URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
-		38CD33A32488FB430073AFFC /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
-		644369D42525C98D00D4B4CF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		383A78492B30D18C009B8C0E /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		383A784A2B30D18C009B8C0E /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		383A784B2B30D18D009B8C0E /* NetjobRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetjobRequest.swift; sourceTree = "<group>"; };
+		383A784C2B30D18D009B8C0E /* URLRequest+Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLRequest+Logger.swift"; sourceTree = "<group>"; };
+		383A784D2B30D18D009B8C0E /* SyncArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncArray.swift; sourceTree = "<group>"; };
+		383A784E2B30D18D009B8C0E /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		383A784F2B30D18D009B8C0E /* CodingStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodingStrategy.swift; sourceTree = "<group>"; };
+		383A78502B30D18D009B8C0E /* Netjob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Netjob.swift; sourceTree = "<group>"; };
+		383A78512B30D18D009B8C0E /* Data+String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+String.swift"; sourceTree = "<group>"; };
+		383A78522B30D18D009B8C0E /* URLRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
+		383A78532B30D18D009B8C0E /* NetjobError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetjobError.swift; sourceTree = "<group>"; };
 		64668F152484CC860086A064 /* Netjob.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Netjob.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		64668F182484CC860086A064 /* Netjob.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Netjob.h; sourceTree = "<group>"; };
 		64668F192484CC860086A064 /* Netjob.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Netjob.plist; sourceTree = "<group>"; };
-		64BA6E1D2484CEFD005D2E5A /* Netjob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Netjob.swift; sourceTree = "<group>"; };
-		64BA6E1F2484CFD3005D2E5A /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
-		64BA6E212484D0E4005D2E5A /* NetworkService+URLSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkService+URLSessionDelegate.swift"; sourceTree = "<group>"; };
-		64BA6E232484D1BA005D2E5A /* NetjobError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetjobError.swift; sourceTree = "<group>"; };
-		64BA6E252484D241005D2E5A /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
-		64BA6E272484D2E5005D2E5A /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		64BA6E292484D3C7005D2E5A /* URLRequest+Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Logger.swift"; sourceTree = "<group>"; };
-		64BA6E2B2484D3E8005D2E5A /* Data+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+String.swift"; sourceTree = "<group>"; };
-		64BA6E2D2484D70E005D2E5A /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,20 +68,19 @@
 		64668F172484CC860086A064 /* Netjob */ = {
 			isa = PBXGroup;
 			children = (
+				383A784F2B30D18D009B8C0E /* CodingStrategy.swift */,
+				383A78512B30D18D009B8C0E /* Data+String.swift */,
+				383A78492B30D18C009B8C0E /* Endpoint.swift */,
+				383A784A2B30D18C009B8C0E /* HTTPMethod.swift */,
+				383A784E2B30D18D009B8C0E /* Logger.swift */,
+				383A78502B30D18D009B8C0E /* Netjob.swift */,
+				383A78532B30D18D009B8C0E /* NetjobError.swift */,
+				383A784B2B30D18D009B8C0E /* NetjobRequest.swift */,
+				383A784D2B30D18D009B8C0E /* SyncArray.swift */,
+				383A78522B30D18D009B8C0E /* URLRequest.swift */,
+				383A784C2B30D18D009B8C0E /* URLRequest+Logger.swift */,
 				64668F182484CC860086A064 /* Netjob.h */,
 				64668F192484CC860086A064 /* Netjob.plist */,
-				64BA6E1D2484CEFD005D2E5A /* Netjob.swift */,
-				64BA6E2D2484D70E005D2E5A /* Endpoint.swift */,
-				64BA6E252484D241005D2E5A /* NetworkService.swift */,
-				64BA6E212484D0E4005D2E5A /* NetworkService+URLSessionDelegate.swift */,
-				64BA6E1F2484CFD3005D2E5A /* HTTPMethod.swift */,
-				64BA6E232484D1BA005D2E5A /* NetjobError.swift */,
-				64BA6E272484D2E5005D2E5A /* Logger.swift */,
-				64BA6E292484D3C7005D2E5A /* URLRequest+Logger.swift */,
-				64BA6E2B2484D3E8005D2E5A /* Data+String.swift */,
-				38CD33A32488FB430073AFFC /* NetworkRequest.swift */,
-				389973EA249A2022000431E1 /* URLRequest.swift */,
-				644369D42525C98D00D4B4CF /* Constants.swift */,
 			);
 			path = Netjob;
 			sourceTree = "<group>";
@@ -131,7 +128,7 @@
 				TargetAttributes = {
 					64668F142484CC860086A064 = {
 						CreatedOnToolsVersion = 11.5;
-						LastSwiftMigration = 1150;
+						LastSwiftMigration = 1500;
 					};
 				};
 			};
@@ -168,18 +165,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				64BA6E2C2484D3E8005D2E5A /* Data+String.swift in Sources */,
-				64BA6E2E2484D70E005D2E5A /* Endpoint.swift in Sources */,
-				64BA6E262484D241005D2E5A /* NetworkService.swift in Sources */,
-				64BA6E282484D2E5005D2E5A /* Logger.swift in Sources */,
-				38CD33A42488FB430073AFFC /* NetworkRequest.swift in Sources */,
-				64BA6E242484D1BA005D2E5A /* NetjobError.swift in Sources */,
-				64BA6E2A2484D3C7005D2E5A /* URLRequest+Logger.swift in Sources */,
-				389973EB249A2022000431E1 /* URLRequest.swift in Sources */,
-				64BA6E202484CFD3005D2E5A /* HTTPMethod.swift in Sources */,
-				64BA6E1E2484CEFD005D2E5A /* Netjob.swift in Sources */,
-				64BA6E222484D0E4005D2E5A /* NetworkService+URLSessionDelegate.swift in Sources */,
-				644369D52525C98D00D4B4CF /* Constants.swift in Sources */,
+				383A78552B30D18D009B8C0E /* HTTPMethod.swift in Sources */,
+				383A785B2B30D18D009B8C0E /* Netjob.swift in Sources */,
+				383A78592B30D18D009B8C0E /* Logger.swift in Sources */,
+				383A785E2B30D18D009B8C0E /* NetjobError.swift in Sources */,
+				383A78572B30D18D009B8C0E /* URLRequest+Logger.swift in Sources */,
+				383A78542B30D18D009B8C0E /* Endpoint.swift in Sources */,
+				383A785A2B30D18D009B8C0E /* CodingStrategy.swift in Sources */,
+				383A78562B30D18D009B8C0E /* NetjobRequest.swift in Sources */,
+				383A785C2B30D18D009B8C0E /* Data+String.swift in Sources */,
+				383A78582B30D18D009B8C0E /* SyncArray.swift in Sources */,
+				383A785D2B30D18D009B8C0E /* URLRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,6 +314,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Netjob/Netjob.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -344,6 +341,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Netjob/Netjob.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -426,6 +424,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Netjob/Netjob.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -508,6 +507,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Netjob/Netjob.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
