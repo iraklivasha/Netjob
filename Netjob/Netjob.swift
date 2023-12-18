@@ -28,7 +28,7 @@ public protocol Network {
                                                                  success: @escaping DecodableResponse<T>,
                                                                  failure: @escaping ErrorResponse) -> NetjobRequest
     
-    func requestPublisher<T: Decodable>(endpoint: Endpoint) -> AnyPublisher<T, Error>
+    func requestPublisher<T: Decodable>(endpoint: Endpoint) -> AnyPublisher<T, NetjobError>
     
     func cancelAll()
     var sslPinningEnabled: Bool { get }
@@ -72,10 +72,12 @@ public class Netjob: NSObject, Network {
         }, failure: failure)
     }
     
-    public func requestPublisher<T: Decodable>(endpoint: Endpoint) -> AnyPublisher<T, Error> {
+    public func requestPublisher<T: Decodable>(endpoint: Endpoint) -> AnyPublisher<T, NetjobError> {
         return requestDataPublisher(endpoint: endpoint)
             .tryMap { data in
                 return try endpoint.codingStrategy.decoder.decode(T.self, from: data)
+            }.mapError { error in
+                return NetjobError.decodingFailed(error: error)
             }
         .eraseToAnyPublisher()
     }
@@ -121,7 +123,7 @@ public class Netjob: NSObject, Network {
         return object
     }
     
-    @discardableResult public func requestDataPublisher(endpoint: Endpoint) -> AnyPublisher<Data, Error> {
+    @discardableResult public func requestDataPublisher(endpoint: Endpoint) -> AnyPublisher<Data, NetjobError> {
         
         self.configuration.timeoutIntervalForRequest = endpoint.timeout
         let session = URLSession(configuration: endpoint.configuration ?? configuration,
@@ -140,7 +142,7 @@ public class Netjob: NSObject, Network {
                     default: throw NetjobError.requestFailed(nil)
                 }
             }
-            .mapError { (error) -> Error in return NetjobError.requestFailed(error) }
+            .mapError { error in return NetjobError.requestFailed(error) }
             .eraseToAnyPublisher()
             
         return publisher

@@ -74,7 +74,7 @@ public extension Endpoint {
                              failure: failure)
     }
     
-    func requestPublisher<T: Decodable>(endpoint: Endpoint) -> AnyPublisher<T, Error> {
+    func requestPublisher<T: Decodable>(endpoint: Endpoint) -> AnyPublisher<T, NetjobError> {
         self.network.requestPublisher(endpoint: endpoint)
     }
 }
