@@ -47,6 +47,9 @@ public protocol Endpoint {
 
 public extension Endpoint {
     
+    var parameters: Any? { nil }
+    var urlParameters: [String: String]? { nil }
+    var headers: [String: String]? { nil }
     var timeout: TimeInterval { 30 }
     var sslPinningEnabled: Bool { false }
     var certFilaPath: String? { nil }
