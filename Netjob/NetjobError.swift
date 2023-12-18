@@ -2,74 +2,49 @@
 //  NetjobError.swift
 //  Netjob
 //
-//  Created by Qutaibah Essa on 01/06/2020.
-//  Copyright © 2020 MRSOOL. All rights reserved.
+//  Created by Irakli Vashakidze on 01/06/2020.
+//  Copyright © 2023 Irakli Vashakidze. All rights reserved.
 //
 
 import Foundation
 
 public enum NetjobError: Error {
-    case general(error: Error?)
-    case timeout
-    case serverError
-    case notFound
-    case unauthorized
-    case badRequest(error: Error?)
-    case decodingFailed(error: Error?)
-    case nilData
-    case prohibited(error: Error?)
-    case custom(message: String)
-    case cancelled
+    case requestFailed(_ error: Error?)
+    case timeout(error: Error?)
+    case notFound(error: Error)
+    case unauthorized(error: Error)
+    case badRequest(error: Error)
+    case decodingFailed(error: Error)
+    case prohibited(error: Error)
     
-    var embeddedError: Error? {
-        switch self {
-        case .decodingFailed(let error):
-            return error
-        case .badRequest(let error):
-            return error
-        case .decodingFailed(let error):
-            return error
-        case .general(let error):
-            return error
-        case .prohibited(let error):
-            return error
-        default:
-            return nil
-        }
-    }
-
-    init(statusCode: Int, error: Error?) {
+    init(statusCode: Int, error: Error) {
         switch statusCode {
         case 400:
             self = .badRequest(error: error)
         case 401:
-            self = .unauthorized
+            self = .unauthorized(error: error)
         case 403:
             self = .prohibited(error: error)
         case 404:
-            self = .notFound
+            self = .notFound(error: error)
         case 422:
             self = .decodingFailed(error: error)
-        case 500..<600:
-            self = .serverError
+        case 408:
+            self = .timeout(error: error)
         default:
-            self = .general(error: error)
+            self = .requestFailed(error)
         }
     }
     
     public var code: Int {
         switch self {
-        case .timeout: return 800
-        case .serverError: return 500
+        case .timeout: return 408
         case .prohibited(_): return 403
         case .notFound: return 404
         case .unauthorized: return 401
         case .badRequest(_): return 400
         case .decodingFailed(_): return 422
-        case .nilData: return 801
-        case .custom(_): return 802
-        case .cancelled: return -999
-        default: return 1000
+        case .requestFailed(_): return 1000
         }
     }
 }

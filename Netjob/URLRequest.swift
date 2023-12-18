@@ -3,7 +3,7 @@
 //  Netjob
 //
 //  Created by Irakli Vashakidze on 6/17/20.
-//  Copyright © 2020 MRSOOL. All rights reserved.
+//  Copyright © 2023 Irakli Vashakidze. All rights reserved.
 //
 
 import Foundation
