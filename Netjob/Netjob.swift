@@ -11,9 +11,8 @@ import Combine
 
 class AnyCodable: Codable {}
 
-public typealias DecodableResponse<T: Decodable> = (T) -> Void
-public typealias DataResponse = (Data) -> Void
-public typealias ErrorResponse = (Error) -> Void
+public typealias NetjobCallback<T> = (Swift.Result<T, NetjobError>) -> Void
+public typealias NetjobDataCallback = (Swift.Result<Data, NetjobError>) -> Void
 
 extension Dictionary {
     var data: Data {
@@ -25,8 +24,7 @@ extension Dictionary {
 public protocol Network {
     
     @discardableResult func request<T: Decodable>(endpoint: Endpoint,
-                                                                 success: @escaping DecodableResponse<T>,
-                                                                 failure: @escaping ErrorResponse) -> NetjobRequest
+                                                  completion: @escaping NetjobCallback<T>) -> NetjobRequest
     
     func requestPublisher<T: Decodable>(endpoint: Endpoint) -> AnyPublisher<T, NetjobError>
     
@@ -51,25 +49,31 @@ public class Netjob: NSObject, Network {
     private var pendingRequests = SyncArray<NetjobRequest>()
     
     @discardableResult public func request<T: Decodable>(endpoint: Endpoint,
-                                                         success: @escaping DecodableResponse<T>,
-                                                         failure: @escaping ErrorResponse) -> NetjobRequest {
-        return requestData(endpoint: endpoint, success: { (data: Data) in
-            do {
-                if data.isEmpty {
-                    let object = try endpoint.codingStrategy.decoder.decode(T.self, from: [:].data)
-                    success(object)
-                    return
+                                                         completion: @escaping NetjobCallback<T>) -> NetjobRequest {
+        
+        return requestData(endpoint: endpoint) { response in
+            switch response {
+            case .success(let data):
+                do {
+                    if data.isEmpty {
+                        let object = try endpoint.codingStrategy.decoder.decode(T.self, from: [:].data)
+                        completion(.success(object))
+                        return
+                    }
+                    
+                    let object = try endpoint.codingStrategy.decoder.decode(T.self, from: data)
+                    completion(.success(object))
+                } catch let e {
+                    completion(.failure(NetjobError.decodingFailed(error: e)))
                 }
-                
-                let object = try endpoint.codingStrategy.decoder.decode(T.self, from: data)
-                success(object)
-            } catch let error {
+                break
+            case .failure(let error):
                 debugPrint("********************************  decoding error start  ***************************************")
                 log(error)
                 debugPrint("********************************  decoding error finish  ***************************************")
-                failure(NetjobError.decodingFailed(error: error))
+                completion(.failure(NetjobError.decodingFailed(error: error)))
             }
-        }, failure: failure)
+        }
     }
     
     public func requestPublisher<T: Decodable>(endpoint: Endpoint) -> AnyPublisher<T, NetjobError> {
@@ -82,9 +86,7 @@ public class Netjob: NSObject, Network {
         .eraseToAnyPublisher()
     }
     
-    @discardableResult public func requestData(endpoint: Endpoint,
-                                               success: @escaping DataResponse,
-                                               failure: @escaping ErrorResponse) -> NetjobRequest {
+    @discardableResult public func requestData(endpoint: Endpoint, completion:@escaping NetjobDataCallback) -> NetjobRequest {
         
         let request = endpoint.httpRequest
         self.configuration.timeoutIntervalForRequest = endpoint.timeout
@@ -98,20 +100,20 @@ public class Netjob: NSObject, Network {
             endpoint.callbackQueue.async {
                 
                 guard let response = response as? HTTPURLResponse else {
-                    failure(NetjobError.requestFailed(nil))
+                    completion(.failure(NetjobError.requestFailed(nil)))
                     return
                 }
                 
                 if let e = error { // cancelled
-                    failure(NetjobError(statusCode: response.statusCode, error: e))
+                    completion(.failure(NetjobError(statusCode: response.statusCode, error: e)))
                     return
                 }
                 
                 log(response.description)
                 
                 switch response.statusCode {
-                    case 200...299: success(data ?? Data())
-                    default: failure(NetjobError.requestFailed(URLError(.badServerResponse)))
+                    case 200...299: completion(.success(data ?? Data()))
+                    default: completion(.failure(NetjobError.requestFailed(URLError(.badServerResponse))))
                 }
             }
         }

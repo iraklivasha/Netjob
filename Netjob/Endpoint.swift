@@ -60,22 +60,13 @@ public extension Endpoint {
     var codingStrategy: CodingStrategy { return netjobCodingStrategy }
     var network: Network { Netjob.shared }
     
-    @discardableResult
-    func requestData(success: @escaping DataResponse, failure: @escaping ErrorResponse)  -> NetjobRequest {
-        self.network.request(endpoint: self, 
-                             success: success,
-                             failure: failure)
-    }
-
-    @discardableResult
-    func request<T: Decodable>(success: @escaping DecodableResponse<T>, failure: @escaping ErrorResponse) -> NetjobRequest {
-        self.network.request(endpoint: self, 
-                             success: success,
-                             failure: failure)
+    @discardableResult func request<T: Decodable>(endpoint: Endpoint,
+                                                  completion: @escaping NetjobCallback<T>) -> NetjobRequest {
+        return network.request(endpoint: endpoint, completion: completion)
     }
     
     func requestPublisher<T: Decodable>(endpoint: Endpoint) -> AnyPublisher<T, NetjobError> {
-        self.network.requestPublisher(endpoint: endpoint)
+        return network.requestPublisher(endpoint: endpoint)
     }
 }
 
