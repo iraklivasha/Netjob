@@ -52,7 +52,7 @@ class RequestObj: Endpoint, Request {
     
     private(set) var requestContentType: String = "application/json"
     
-    private(set) var network: Network = Netjob.shared
+    private(set) var network: Network = NetworkService.shared
     private(set) var configuration: URLSessionConfiguration?
     private(set) var codingStrategy: CodingStrategy = CodingStrategy.instance
     private(set) var sslPinningEnabled: Bool = false
@@ -134,7 +134,7 @@ class RequestObj: Endpoint, Request {
             return NetjobMock(file: path)
         }
         
-        return Netjob.shared
+        return NetworkService.shared
     }
     
     @discardableResult public func request<T: Decodable>(completion: @escaping NetjobCallback<T>) -> CancellableTask {

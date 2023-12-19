@@ -13,7 +13,7 @@
 		383A78582B30D18D009B8C0E /* SyncArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A784D2B30D18D009B8C0E /* SyncArray.swift */; };
 		383A78592B30D18D009B8C0E /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A784E2B30D18D009B8C0E /* Logger.swift */; };
 		383A785A2B30D18D009B8C0E /* CodingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A784F2B30D18D009B8C0E /* CodingStrategy.swift */; };
-		383A785B2B30D18D009B8C0E /* Netjob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A78502B30D18D009B8C0E /* Netjob.swift */; };
+		383A785B2B30D18D009B8C0E /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A78502B30D18D009B8C0E /* Network.swift */; };
 		383A785C2B30D18D009B8C0E /* Data+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A78512B30D18D009B8C0E /* Data+String.swift */; };
 		383A785D2B30D18D009B8C0E /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A78522B30D18D009B8C0E /* URLRequest.swift */; };
 		383A785E2B30D18D009B8C0E /* NetjobError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A78532B30D18D009B8C0E /* NetjobError.swift */; };
@@ -29,7 +29,7 @@
 		383A784D2B30D18D009B8C0E /* SyncArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncArray.swift; sourceTree = "<group>"; };
 		383A784E2B30D18D009B8C0E /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		383A784F2B30D18D009B8C0E /* CodingStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodingStrategy.swift; sourceTree = "<group>"; };
-		383A78502B30D18D009B8C0E /* Netjob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Netjob.swift; sourceTree = "<group>"; };
+		383A78502B30D18D009B8C0E /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		383A78512B30D18D009B8C0E /* Data+String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+String.swift"; sourceTree = "<group>"; };
 		383A78522B30D18D009B8C0E /* URLRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
 		383A78532B30D18D009B8C0E /* NetjobError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetjobError.swift; sourceTree = "<group>"; };
@@ -72,7 +72,7 @@
 			children = (
 				383A78492B30D18C009B8C0E /* Endpoint.swift */,
 				383A785F2B3188A1009B8C0E /* Request.swift */,
-				383A78502B30D18D009B8C0E /* Netjob.swift */,
+				383A78502B30D18D009B8C0E /* Network.swift */,
 				383A78532B30D18D009B8C0E /* NetjobError.swift */,
 				383A784B2B30D18D009B8C0E /* CancellableTask.swift */,
 				383A784F2B30D18D009B8C0E /* CodingStrategy.swift */,
@@ -170,7 +170,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				383A78602B3188A1009B8C0E /* Request.swift in Sources */,
-				383A785B2B30D18D009B8C0E /* Netjob.swift in Sources */,
+				383A785B2B30D18D009B8C0E /* Network.swift in Sources */,
 				383A78592B30D18D009B8C0E /* Logger.swift in Sources */,
 				383A78642B319615009B8C0E /* NetjobMock.swift in Sources */,
 				383A785E2B30D18D009B8C0E /* NetjobError.swift in Sources */,

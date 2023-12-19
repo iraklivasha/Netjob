@@ -40,14 +40,14 @@ extension Network {
     }
 }
 
-public class Netjob: NSObject, Network {
+class NetworkService: NSObject, Network {
     
-    public static let shared = Netjob()
+    static let shared = NetworkService()
     private var pendingRequests = SyncArray<CancellableTask>()
     
     private override init() {}
     
-    @discardableResult public func request<T: Decodable>(endpoint: Endpoint,
+    @discardableResult func request<T: Decodable>(endpoint: Endpoint,
                                                          completion: @escaping NetjobCallback<T>) -> CancellableTask {
         
         return requestData(endpoint: endpoint) { response in
@@ -75,7 +75,7 @@ public class Netjob: NSObject, Network {
         }
     }
     
-    public func requestPublisher<T: Decodable>(endpoint: Endpoint) -> AnyPublisher<T, NetjobError> {
+    func requestPublisher<T: Decodable>(endpoint: Endpoint) -> AnyPublisher<T, NetjobError> {
         return requestDataPublisher(endpoint: endpoint)
             .tryMap { data in
                 return try endpoint.codingStrategy.decoder.decode(T.self, from: data)
@@ -85,7 +85,7 @@ public class Netjob: NSObject, Network {
         .eraseToAnyPublisher()
     }
     
-    @discardableResult public func requestData(endpoint: Endpoint, completion:@escaping NetjobDataCallback) -> CancellableTask {
+    @discardableResult func requestData(endpoint: Endpoint, completion:@escaping NetjobDataCallback) -> CancellableTask {
         
         let request = endpoint.httpRequest
         self.configuration.timeoutIntervalForRequest = endpoint.timeout
@@ -124,7 +124,7 @@ public class Netjob: NSObject, Network {
         return object
     }
     
-    @discardableResult public func requestDataPublisher(endpoint: Endpoint) -> AnyPublisher<Data, NetjobError> {
+    @discardableResult func requestDataPublisher(endpoint: Endpoint) -> AnyPublisher<Data, NetjobError> {
         
         self.configuration.timeoutIntervalForRequest = endpoint.timeout
         let session = URLSession(configuration: endpoint.configuration ?? configuration,
@@ -149,7 +149,7 @@ public class Netjob: NSObject, Network {
         return publisher
     }
     
-    public func cancelAll() {
+    func cancelAll() {
         self.pendingRequests.forEach({ s in
             s.cancel()
         })
@@ -157,7 +157,7 @@ public class Netjob: NSObject, Network {
     }
 }
 
-extension Netjob: URLSessionDelegate {
+extension NetworkService: URLSessionDelegate {
     
     public func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
         if (challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust) {

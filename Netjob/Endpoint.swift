@@ -71,7 +71,7 @@ public extension Endpoint {
             return NetjobMock(file: path)
         }
         
-        return Netjob.shared
+        return NetworkService.shared
     }
     var mockResponsePath: String? { nil }
     
@@ -146,7 +146,7 @@ extension Endpoint {
 }
 
 ///Request builder 
-public class NetjobEndpoint {
+public class Netjob {
     public static func url( _ url: String) -> Request {
         return RequestObj(url: url)
     }
