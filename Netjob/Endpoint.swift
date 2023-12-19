@@ -9,7 +9,7 @@
 import Foundation
 import Combine
 
-/// Namespace for all http methods
+/// Http methods
 public enum HTTPMethod: String {
     case get
     case post
@@ -17,8 +17,6 @@ public enum HTTPMethod: String {
     case delete
     case patch
 }
-
-private let netjobCodingStrategy = CodingStrategy()
 
 /// Endpoint interface
 public protocol Endpoint {
@@ -66,7 +64,7 @@ public extension Endpoint {
     var callbackQueue: DispatchQueue { DispatchQueue.main }
     var requestContentType: String { "application/json" }
     var configuration: URLSessionConfiguration? { nil }
-    var codingStrategy: CodingStrategy { return netjobCodingStrategy }
+    var codingStrategy: CodingStrategy { return CodingStrategy.instance }
     var network: Network { Netjob.shared }
     
     @discardableResult func request<T: Decodable>(endpoint: Endpoint,
