@@ -170,3 +170,5 @@ class API_Publisher {
 }
 
 ```
+
+For contribution, drop me an email to: `iraklivashaka@gmail.com` 
