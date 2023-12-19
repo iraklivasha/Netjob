@@ -71,4 +71,102 @@ Netjob
   .withMockResponsePath("fake_response")
   .requestPublisher(type: Employee.self)
 ``` 
+Good job 👍
 
+<h2>Want to keep your endpoints in more structured way ? </h2>
+
+Here's what you can do:
+ 
+```swift
+struct Router {}
+
+protocol MyEndpoint: Endpoint {
+    var path: String { get }
+    var method: HTTPMethod { get }
+}
+
+extension MyEndpoint {
+    
+    var url: String {
+        return "https://yourrestapi.com/"
+    }
+    
+    var method: HTTPMethod {
+        .get
+    }
+}
+
+struct Employee: Codable {
+    var firstName: String
+    var lastName: String
+}
+
+extension Router {
+    enum employees: MyEndpoint {
+        
+        var path: String {
+            switch self {
+            case .fetch:
+                return "employees"
+            case .add(_):
+                return "employees/add"
+            }
+        }
+        
+        var parameters: Any? {
+            switch self {
+            case .add(let params):
+                return params
+            default: return nil
+            }
+        }
+        
+        var method: HTTPMethod {
+            switch self {
+            case .fetch:
+                return .get
+            case .add(_):
+                return .post
+            }
+        }
+        
+        case fetch
+        case add(params: [String: Any])
+    }
+}
+
+
+class API_Completions {
+    
+    public class func fetchEmployees(completion: @escaping (Swift.Result<Employee, NetjobError>) -> Void) -> CancellableTask? {
+        let endpoint = Router.employees.fetch
+        return endpoint.request(endpoint: endpoint, completion: completion)
+    }
+    
+    public class func addEmployeePublisher(firstName: String,
+                                           lastName: String,
+                                           completion: @escaping (Swift.Result<Employee, NetjobError>) -> Void) -> CancellableTask? {
+        let endpoint = Router.employees.add(params: [
+            "firstName": firstName,
+            "lastName": lastName
+        ])
+        return endpoint.request(endpoint: endpoint, completion: completion)
+    }
+}
+
+class API_Publisher {
+    public class func fetchEmployeesPublisher() -> AnyPublisher<[Employee], NetjobError> {
+        let endpoint = Router.employees.fetch
+        return endpoint.requestPublisher(endpoint: endpoint)
+    }
+    
+    public class func addEmployeePublisher(firstName: String, lastName: String) -> AnyPublisher<Employee, NetjobError> {
+        let endpoint = Router.employees.add(params: [
+            "firstName": firstName,
+            "lastName": lastName
+        ])
+        return endpoint.requestPublisher(endpoint: endpoint)
+    }
+}
+
+```
