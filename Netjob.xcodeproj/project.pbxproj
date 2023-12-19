@@ -18,6 +18,7 @@
 		383A785D2B30D18D009B8C0E /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A78522B30D18D009B8C0E /* URLRequest.swift */; };
 		383A785E2B30D18D009B8C0E /* NetjobError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A78532B30D18D009B8C0E /* NetjobError.swift */; };
 		383A78602B3188A1009B8C0E /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A785F2B3188A1009B8C0E /* Request.swift */; };
+		383A78642B319615009B8C0E /* NetjobMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383A78632B319615009B8C0E /* NetjobMock.swift */; };
 		64668F1A2484CC860086A064 /* Netjob.h in Headers */ = {isa = PBXBuildFile; fileRef = 64668F182484CC860086A064 /* Netjob.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -33,6 +34,7 @@
 		383A78522B30D18D009B8C0E /* URLRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
 		383A78532B30D18D009B8C0E /* NetjobError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetjobError.swift; sourceTree = "<group>"; };
 		383A785F2B3188A1009B8C0E /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		383A78632B319615009B8C0E /* NetjobMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetjobMock.swift; sourceTree = "<group>"; };
 		64668F152484CC860086A064 /* Netjob.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Netjob.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		64668F182484CC860086A064 /* Netjob.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Netjob.h; sourceTree = "<group>"; };
 		64668F192484CC860086A064 /* Netjob.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Netjob.plist; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 				383A784D2B30D18D009B8C0E /* SyncArray.swift */,
 				383A78522B30D18D009B8C0E /* URLRequest.swift */,
 				383A784C2B30D18D009B8C0E /* URLRequest+Logger.swift */,
+				383A78632B319615009B8C0E /* NetjobMock.swift */,
 				64668F182484CC860086A064 /* Netjob.h */,
 				64668F192484CC860086A064 /* Netjob.plist */,
 			);
@@ -169,6 +172,7 @@
 				383A78602B3188A1009B8C0E /* Request.swift in Sources */,
 				383A785B2B30D18D009B8C0E /* Netjob.swift in Sources */,
 				383A78592B30D18D009B8C0E /* Logger.swift in Sources */,
+				383A78642B319615009B8C0E /* NetjobMock.swift in Sources */,
 				383A785E2B30D18D009B8C0E /* NetjobError.swift in Sources */,
 				383A78572B30D18D009B8C0E /* URLRequest+Logger.swift in Sources */,
 				383A78542B30D18D009B8C0E /* Endpoint.swift in Sources */,

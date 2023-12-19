@@ -50,6 +50,7 @@ public protocol Endpoint {
     var sslPinningEnabled: Bool { get }
     var certFilaPath: String? { get }
     var callbackQueue: DispatchQueue { get }
+    var mockResponsePath: String? { get }
 }
 
 public extension Endpoint {
@@ -66,6 +67,7 @@ public extension Endpoint {
     var configuration: URLSessionConfiguration? { nil }
     var codingStrategy: CodingStrategy { return CodingStrategy.instance }
     var network: Network { Netjob.shared }
+    var mockResponsePath: String? { nil }
     
     @discardableResult func request<T: Decodable>(endpoint: Endpoint,
                                                   completion: @escaping NetjobCallback<T>) -> CancellableTask {

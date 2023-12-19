@@ -57,6 +57,7 @@ class RequestObj: Endpoint, Request {
     private(set) var sslPinningEnabled: Bool = false
     private(set) var certFilaPath: String?
     private(set) var callbackQueue: DispatchQueue = .main
+    private(set) var mockResponsePath: String? = nil
     
     init(url: String) {
         self.url = url
@@ -122,11 +123,24 @@ class RequestObj: Endpoint, Request {
         return self
     }
     
+    func withMockResponsePath(_ path: String?) -> Request {
+        self.mockResponsePath = path
+        return self
+    }
+    
+    private var _network: Network {
+        if let path = self.mockResponsePath {
+            return NetjobMock(file: path)
+        }
+        
+        return Netjob.shared
+    }
+    
     @discardableResult public func request<T: Decodable>(completion: @escaping NetjobCallback<T>) -> CancellableTask {
-        self.network.request(endpoint: self, completion: completion)
+        self._network.request(endpoint: self, completion: completion)
     }
     
     public func requestPublisher<T: Decodable>() -> AnyPublisher<T, NetjobError> {
-        self.network.requestPublisher(endpoint: self)
+        self._network.requestPublisher(endpoint: self)
     }
 }
