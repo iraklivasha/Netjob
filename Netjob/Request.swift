@@ -24,7 +24,7 @@ public protocol Request {
     func withCallbackQueue(_ queue: DispatchQueue) -> Request
     func withMockResponsePath(_ path: String?) -> Request
     @discardableResult func request<T: Decodable>(completion: @escaping NetjobCallback<T>) -> CancellableTask
-    func requestPublisher<T: Decodable>() -> AnyPublisher<T, NetjobError>
+    func requestPublisher<T: Decodable>(type: T.Type) -> AnyPublisher<T, NetjobError>
 }
 
 class RequestObj: Endpoint, Request {
@@ -141,7 +141,7 @@ class RequestObj: Endpoint, Request {
         self._network.request(endpoint: self, completion: completion)
     }
     
-    public func requestPublisher<T: Decodable>() -> AnyPublisher<T, NetjobError> {
+    public func requestPublisher<T: Decodable>(type: T.Type) -> AnyPublisher<T, NetjobError> {
         self._network.requestPublisher(endpoint: self)
     }
 }
