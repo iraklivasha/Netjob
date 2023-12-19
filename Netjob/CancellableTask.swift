@@ -10,7 +10,7 @@ import Foundation
 /**
  A protocol representing a network request in the Netjob framework.
 */
-public protocol NetjobRequest: class {
+public protocol CancellableTask: AnyObject {
     
     /// A unique identifier for the network request.
     var id: Int { get }
@@ -29,7 +29,7 @@ public protocol NetjobRequest: class {
     func cancel()
 }
 
-class NetjobRequestImpl: NetjobRequest {
+class CancellableTaskImpl: CancellableTask {
     
     private(set) var task: URLSessionDataTask
     

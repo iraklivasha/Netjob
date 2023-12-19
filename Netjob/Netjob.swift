@@ -24,7 +24,7 @@ extension Dictionary {
 public protocol Network {
     
     @discardableResult func request<T: Decodable>(endpoint: Endpoint,
-                                                  completion: @escaping NetjobCallback<T>) -> NetjobRequest
+                                                  completion: @escaping NetjobCallback<T>) -> CancellableTask
     
     func requestPublisher<T: Decodable>(endpoint: Endpoint) -> AnyPublisher<T, NetjobError>
     
@@ -43,13 +43,12 @@ extension Network {
 public class Netjob: NSObject, Network {
     
     public static let shared = Netjob()
+    private var pendingRequests = SyncArray<CancellableTask>()
     
     private override init() {}
     
-    private var pendingRequests = SyncArray<NetjobRequest>()
-    
     @discardableResult public func request<T: Decodable>(endpoint: Endpoint,
-                                                         completion: @escaping NetjobCallback<T>) -> NetjobRequest {
+                                                         completion: @escaping NetjobCallback<T>) -> CancellableTask {
         
         return requestData(endpoint: endpoint) { response in
             switch response {
@@ -86,7 +85,7 @@ public class Netjob: NSObject, Network {
         .eraseToAnyPublisher()
     }
     
-    @discardableResult public func requestData(endpoint: Endpoint, completion:@escaping NetjobDataCallback) -> NetjobRequest {
+    @discardableResult public func requestData(endpoint: Endpoint, completion:@escaping NetjobDataCallback) -> CancellableTask {
         
         let request = endpoint.httpRequest
         self.configuration.timeoutIntervalForRequest = endpoint.timeout
@@ -118,7 +117,7 @@ public class Netjob: NSObject, Network {
             }
         }
         
-        let object = NetjobRequestImpl(task: task)
+        let object = CancellableTaskImpl(task: task)
         self.pendingRequests.append(newElement: object)
         task.resume()
         

@@ -9,6 +9,15 @@
 import Foundation
 import Combine
 
+/// Namespace for all http methods
+public enum HTTPMethod: String {
+    case get
+    case post
+    case put
+    case delete
+    case patch
+}
+
 private let netjobCodingStrategy = CodingStrategy()
 
 /// Endpoint interface
@@ -61,7 +70,7 @@ public extension Endpoint {
     var network: Network { Netjob.shared }
     
     @discardableResult func request<T: Decodable>(endpoint: Endpoint,
-                                                  completion: @escaping NetjobCallback<T>) -> NetjobRequest {
+                                                  completion: @escaping NetjobCallback<T>) -> CancellableTask {
         return network.request(endpoint: endpoint, completion: completion)
     }
     
@@ -127,5 +136,12 @@ extension Endpoint {
         }
         
         return str
+    }
+}
+
+///Request builder 
+public class NetjobEndpoint {
+    public static func url( _ url: String) -> Request {
+        return RequestObj(url: url)
     }
 }
