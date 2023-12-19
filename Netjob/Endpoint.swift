@@ -66,7 +66,13 @@ public extension Endpoint {
     var requestContentType: String { "application/json" }
     var configuration: URLSessionConfiguration? { nil }
     var codingStrategy: CodingStrategy { return CodingStrategy.instance }
-    var network: Network { Netjob.shared }
+    var network: Network {
+        if let path = mockResponsePath {
+            return NetjobMock(file: path)
+        }
+        
+        return Netjob.shared
+    }
     var mockResponsePath: String? { nil }
     
     @discardableResult func request<T: Decodable>(endpoint: Endpoint,

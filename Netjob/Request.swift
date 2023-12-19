@@ -22,6 +22,7 @@ public protocol Request {
     func withSSLPinningEnabled(_ enabled: Bool) -> Request
     func withCertFilaPath(_ filePath: String) -> Request
     func withCallbackQueue(_ queue: DispatchQueue) -> Request
+    func withMockResponsePath(_ path: String?) -> Request
     @discardableResult func request<T: Decodable>(completion: @escaping NetjobCallback<T>) -> CancellableTask
     func requestPublisher<T: Decodable>() -> AnyPublisher<T, NetjobError>
 }
