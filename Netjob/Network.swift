@@ -27,7 +27,8 @@ public protocol Network {
                                                   completion: @escaping NetjobCallback<T>) -> CancellableTask
     
     func requestPublisher<T: Decodable>(endpoint: Endpoint) -> AnyPublisher<T, NetjobError>
-    
+    @discardableResult func requestDataAsync(endpoint: Endpoint) async throws -> Data
+    func requestAsync<T: Decodable>(type: T.Type, endpoint: Endpoint) async throws -> T
     func cancelAll()
     var sslPinningEnabled: Bool { get }
     var configuration: URLSessionConfiguration { get }
@@ -72,6 +73,19 @@ class NetworkService: NSObject, Network {
                 debugPrint("********************************  decoding error finish  ***************************************")
                 completion(.failure(NetjobError.decodingFailed(error: error)))
             }
+        }
+    }
+    
+    func requestAsync<T: Decodable>(type: T.Type, endpoint: Endpoint) async throws -> T {
+        do {
+            let data = try await self.requestDataAsync(endpoint: endpoint)
+            let decodedData = try endpoint.codingStrategy.decoder.decode(T.self, from: data)
+            return decodedData
+        } catch {
+            if let error = error as? URLError, error.code == .cancelled {
+                return AnyCodable() as! T
+            }
+            throw NetjobError.decodingFailed(error: error)
         }
     }
     
@@ -147,6 +161,35 @@ class NetworkService: NSObject, Network {
             .eraseToAnyPublisher()
             
         return publisher
+    }
+    
+    @discardableResult func requestDataAsync(endpoint: Endpoint) async throws -> Data {
+        
+        self.configuration.timeoutIntervalForRequest = endpoint.timeout
+        let session = URLSession(configuration: endpoint.configuration ?? configuration,
+                                 delegate:  endpoint.sslPinningEnabled ? self : nil,
+                                 delegateQueue: nil)
+       
+        let response = await try session.data(for: endpoint.httpRequest)
+        
+        return try await withUnsafeThrowingContinuation { continuation in
+            
+            endpoint.callbackQueue.async {
+                guard let httpResponse = response.1 as? HTTPURLResponse else {
+                    continuation.resume(throwing: NetjobError.requestFailed(nil))
+                    return
+                }
+                
+                switch httpResponse.statusCode {
+                    case 200...299:
+                    continuation.resume(returning: response.0)
+                    break
+                default:
+                    continuation.resume(throwing: NetjobError.requestFailed(nil))
+                    break
+                }
+            }
+        }
     }
     
     func cancelAll() {

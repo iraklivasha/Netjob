@@ -10,6 +10,15 @@ import Foundation
 import Combine
 
 class NetjobMock: Network {
+    func requestAsync<T>(type: T.Type, endpoint: Endpoint) async throws -> T where T : Decodable {
+        let data = try await requestDataAsync(endpoint: endpoint)
+        return try endpoint.codingStrategy.decoder.decode(T.self, from: data)
+    }
+    
+    
+    func requestDataAsync(endpoint: Endpoint) async throws -> Data {
+        return self.jsonObject ?? Data()
+    }
     
     func request<T>(endpoint: Endpoint, completion: @escaping NetjobCallback<T>) -> CancellableTask where T : Decodable {
         let data = self.jsonObject ?? Data()
