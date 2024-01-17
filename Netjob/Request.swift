@@ -25,6 +25,7 @@ public protocol Request {
     func withMockResponsePath(_ path: String?) -> Request
     @discardableResult func request<T: Decodable>(completion: @escaping NetjobCallback<T>) -> CancellableTask
     func requestPublisher<T: Decodable>(type: T.Type) -> AnyPublisher<T, NetjobError>
+    func requestAsync<T: Decodable>(type: T.Type) async throws -> T
 }
 
 class RequestObj: Endpoint, Request {
@@ -143,5 +144,9 @@ class RequestObj: Endpoint, Request {
     
     public func requestPublisher<T: Decodable>(type: T.Type) -> AnyPublisher<T, NetjobError> {
         self._network.requestPublisher(endpoint: self)
+    }
+    
+    func requestAsync<T: Decodable>(type: T.Type) async throws -> T {
+        try await self._network.requestAsync(type: type, endpoint: self)
     }
 }
