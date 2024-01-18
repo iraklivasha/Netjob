@@ -63,7 +63,7 @@ public enum NetjobError: Error {
         }
     }
     
-    var message: String {
+    public var message: String {
         switch self {
         case .unknown:          return "Something went wrong"
         case .notFound:         return "Resource not found"
