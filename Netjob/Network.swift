@@ -170,7 +170,7 @@ class NetworkService: NSObject, Network {
                                  delegate:  endpoint.sslPinningEnabled ? self : nil,
                                  delegateQueue: nil)
        
-        let response = await try session.data(for: endpoint.httpRequest)
+        let response = try await session.data(for: endpoint.httpRequest)
         
         return try await withUnsafeThrowingContinuation { continuation in
             

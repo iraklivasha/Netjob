@@ -26,6 +26,7 @@ public protocol Request {
     @discardableResult func request<T: Decodable>(completion: @escaping NetjobCallback<T>) -> CancellableTask
     func requestPublisher<T: Decodable>(type: T.Type) -> AnyPublisher<T, NetjobError>
     func requestAsync<T: Decodable>(type: T.Type) async throws -> T
+    @discardableResult func requestDataAsync() async throws -> Data
 }
 
 class RequestObj: Endpoint, Request {
@@ -148,5 +149,9 @@ class RequestObj: Endpoint, Request {
     
     func requestAsync<T: Decodable>(type: T.Type) async throws -> T {
         try await self._network.requestAsync(type: type, endpoint: self)
+    }
+    
+    @discardableResult func requestDataAsync() async throws -> Data {
+        try await self._network.requestDataAsync(endpoint: self)
     }
 }
