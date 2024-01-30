@@ -10,17 +10,17 @@ import Foundation
 public enum NetjobError: Error {
     case requestFailed(_ error: Error?)
     case timeout(error: Error?)
-    case notFound(error: Error)
+    case notFound(error: Error?)
     case unauthorized
-    case badRequest(error: Error)
-    case decodingFailed(error: Error)
-    case prohibited(error: Error)
+    case badRequest(error: Error?)
+    case decodingFailed(error: Error?)
+    case prohibited(error: Error?)
     case user(message: String)
-    case server(error: Error)
+    case server
     case cancelled
     case unknown(error: Error?)
     
-    init(statusCode: Int, error: Error, message: String? = nil) {
+    init(statusCode: Int, error: Error?, message: String? = nil) {
         switch statusCode {
         case 400:
             self = .badRequest(error: error)
@@ -35,7 +35,7 @@ public enum NetjobError: Error {
         case 408:
             self = .timeout(error: error)
         case 500:
-            self = .server(error: error)
+            self = .server
         case 1000:
             self = .requestFailed(error)
         case 1001:
@@ -58,7 +58,7 @@ public enum NetjobError: Error {
         case .requestFailed(_): return 1000
         case .cancelled: return -999
         case .user(_): return 1001
-        case .server(_): return 500
+        case .server: return 500
         case .unknown(_): return 1002
         }
     }
@@ -71,7 +71,7 @@ public enum NetjobError: Error {
         case .server:           return "Internal server error"
         case .cancelled:        return "Cancelled"
         case .unauthorized:     return "Unauthorized access"
-        case .decodingFailed:   return "Invalid content"
+        case .decodingFailed:   return "Invalid response"
         case .timeout:          return "Network timeout"
         case .requestFailed:    return "Request failed"
         case .badRequest:       return "Bad request"

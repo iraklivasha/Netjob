@@ -77,11 +77,17 @@ class NetworkService: NSObject, Network {
     }
     
     func requestAsync<T: Decodable>(type: T.Type, endpoint: Endpoint) async throws -> T {
+        
+        let data = try await self.requestDataAsync(endpoint: endpoint)
+        
         do {
-            let data = try await self.requestDataAsync(endpoint: endpoint)
             let decodedData = try endpoint.codingStrategy.decoder.decode(T.self, from: data)
             return decodedData
         } catch {
+            debugPrint("******************************** Decoding error start ***************************************")
+            log(endpoint.url)
+            log(error)
+            debugPrint("******************************** Decoding error finish ***************************************")
             if let error = error as? URLError, error.code == .cancelled {
                 return AnyCodable() as! T
             }
@@ -170,25 +176,29 @@ class NetworkService: NSObject, Network {
                                  delegate:  endpoint.sslPinningEnabled ? self : nil,
                                  delegateQueue: nil)
        
-        let response = try await session.data(for: endpoint.httpRequest)
-        
-        return try await withUnsafeThrowingContinuation { continuation in
+        do {
+            let response = try await session.data(for: endpoint.httpRequest)
             
-            endpoint.callbackQueue.async {
-                guard let httpResponse = response.1 as? HTTPURLResponse else {
-                    continuation.resume(throwing: NetjobError.requestFailed(nil))
-                    return
-                }
+            return try await withUnsafeThrowingContinuation { continuation in
                 
-                switch httpResponse.statusCode {
-                    case 200...299:
-                    continuation.resume(returning: response.0)
-                    break
-                default:
-                    continuation.resume(throwing: NetjobError.requestFailed(nil))
-                    break
+                endpoint.callbackQueue.async {
+                    guard let httpResponse = response.1 as? HTTPURLResponse else {
+                        continuation.resume(throwing: NetjobError.requestFailed(nil))
+                        return
+                    }
+                    
+                    switch httpResponse.statusCode {
+                        case 200...299:
+                        continuation.resume(returning: response.0)
+                        break
+                    default:
+                        continuation.resume(throwing: NetjobError(statusCode: httpResponse.statusCode, error: nil))
+                        break
+                    }
                 }
             }
+        } catch {
+            throw error
         }
     }
     
